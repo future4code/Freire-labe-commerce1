@@ -46,55 +46,55 @@ export default class ListaProdutos extends Component {
             {
                 id: 1,
                 name: "BigBoy",
-                value: 10000,
+                value: 10.000,
                 imageUrl:Imagem1,
     },
             {
                 id: 2,
                 name: "Goliath",
-                value: 15000,
+                value: 15.000,
                 imageUrl: Imagem2,
     },
             {
                 id: 3,
                 name: "Leonov",
-                value: 30000,
+                value: 30.000,
                 imageUrl: Imagem3,
     },
             {
                 id: 4,
                 name: "Liberator",
-                value: 18000,
+                value: 18.000,
                 imageUrl: Imagem4,
     },
             {
                 id: 5,
                 name: "Newpiranha",
-                value: 17000,
+                value: 17.000,
                 imageUrl: Imagem5,
     },
             {
                 id: 6,
                 name: "Nostromo",
-                value: 10000.0,
+                value: 22.000,
                 imageUrl: Imagem6,
     },
             {
                 id: 7,
                 name: "Phoenix",
-                value: 12000,
+                value: 12.000,
                 imageUrl: Imagem7,
     },
             {
                 id: 8,
                 name: "Vevengek",
-                value: 40000,
+                value: 40.000,
                 imageUrl: Imagem8,
     },
             {
                 id: 9,
                 name: "Yamato",
-                value: 30000,
+                value: 30.000,
                 imageUrl: Imagem9,
     },
 
@@ -117,12 +117,16 @@ export default class ListaProdutos extends Component {
         )
 
 
-        return (<DivPai>
+        return (
+        <div>
+        <p>Quantidade de Produtos: {this.state.produtos.length}</p>
+        
+        <DivPai>
             
         {renderizarProdutos}
         
-        </DivPai>)
-
+        </DivPai>
+        </div>)
     }
 
 }
