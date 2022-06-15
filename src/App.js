@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components"
 import Logo from "./img/logo.png"
+import ListaProdutos from './Components/Produtos/Produtos';
 
 
 const Container = styled.div`
@@ -44,7 +45,7 @@ function App() {
       <Header><Imagem src={Logo} alt="" /></Header>
       <Main>
         <Filtros></Filtros>
-        <Produtos></Produtos>
+        <Produtos> <ListaProdutos/> </Produtos>
         <Carrinho></Carrinho>
       </Main>
       <footer></footer>
