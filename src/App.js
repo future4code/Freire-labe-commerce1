@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components"
 import Logo from "./img/logo.png"
 import ListaProdutos from './Components/Produtos/Produtos';
-
+import Filter from './Components/filtro/filtro';
 
 const Container = styled.div`
 display: flex;
@@ -46,7 +46,7 @@ function App() {
     <Container className="App">
       <Header><Imagem src={Logo} alt="" /></Header>
       <Main>
-        <Filtros></Filtros>
+        <Filtros>{Filter}</Filtros>
         <Produtos> <ListaProdutos/> </Produtos>
         <Carrinho></Carrinho>
       </Main>
