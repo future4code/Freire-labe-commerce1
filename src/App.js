@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components"
 import Logo from "./img/logo.png"
+import ListaProdutos from './Components/Produtos/Produtos';
 
 
 const Container = styled.div`
@@ -29,7 +30,9 @@ const Filtros = styled.div`
 
 const Produtos = styled.div`
   grid-column: 5/span 12;
-  background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  
 
 `
 
@@ -44,7 +47,7 @@ function App() {
       <Header><Imagem src={Logo} alt="" /></Header>
       <Main>
         <Filtros></Filtros>
-        <Produtos></Produtos>
+        <Produtos> <ListaProdutos/> </Produtos>
         <Carrinho></Carrinho>
       </Main>
       <footer></footer>
