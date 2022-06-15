@@ -17,12 +17,25 @@ const Cards=styled.div`
     justify-content: center;
     border-radius: 8px;
     border: 1px solid black;
-    max-width: 60%;
-    margin: 0;
+    width: 30%;
+    margin: 0 0 15px 0;
+    
+    
 `
 const Imagem= styled.img`
-    width: 50%;
+    width: 30%;
 `
+const DivPai=styled.div`
+    display: flex;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+`
+const NomeProduto= styled.p`
+    font-size: large;
+    font-weight: bold;
+` 
 
 
 
@@ -33,31 +46,31 @@ export default class ListaProdutos extends Component {
             {
                 id: 1,
                 name: "BigBoy",
-                value: 10000.0,
+                value: 10000,
                 imageUrl:Imagem1,
     },
             {
                 id: 2,
                 name: "Goliath",
-                value: 10000.0,
+                value: 15000,
                 imageUrl: Imagem2,
     },
             {
                 id: 3,
                 name: "Leonov",
-                value: 10000.0,
+                value: 30000,
                 imageUrl: Imagem3,
     },
             {
                 id: 4,
                 name: "Liberator",
-                value: 10000.0,
+                value: 18000,
                 imageUrl: Imagem4,
     },
             {
                 id: 5,
                 name: "Newpiranha",
-                value: 10000.0,
+                value: 17000,
                 imageUrl: Imagem5,
     },
             {
@@ -69,19 +82,19 @@ export default class ListaProdutos extends Component {
             {
                 id: 7,
                 name: "Phoenix",
-                value: 10000.0,
+                value: 12000,
                 imageUrl: Imagem7,
     },
             {
                 id: 8,
                 name: "Vevengek",
-                value: 10000.0,
+                value: 40000,
                 imageUrl: Imagem8,
     },
             {
                 id: 9,
                 name: "Yamato",
-                value: 10000.0,
+                value: 30000,
                 imageUrl: Imagem9,
     },
 
@@ -95,6 +108,7 @@ export default class ListaProdutos extends Component {
             return (
                 <Cards key={Math.random()}>
                     <Imagem src={produto.imageUrl} alt="" />
+                    <NomeProduto>{produto.name}</NomeProduto>
                     <p>R$:{produto.value} </p> 
                     <button>Adicionar ao Carrinho</button>
                 </Cards>
@@ -103,11 +117,11 @@ export default class ListaProdutos extends Component {
         )
 
 
-        return (<div>
+        return (<DivPai>
             
         {renderizarProdutos}
         
-        </div>)
+        </DivPai>)
 
     }
 
