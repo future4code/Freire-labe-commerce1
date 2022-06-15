@@ -30,7 +30,9 @@ const Filtros = styled.div`
 
 const Produtos = styled.div`
   grid-column: 5/span 12;
-  background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  
 
 `
 
