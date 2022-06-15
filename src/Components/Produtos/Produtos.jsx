@@ -10,7 +10,7 @@ import Imagem7 from '../../img/Phoenix.png'
 import Imagem8 from '../../img/Vevengek.png'
 import Imagem9 from '../../img/Yamato.png'
 
-const Cards=styled.div`
+const Cards = styled.div`
     display: flex;
     flex-direction:column;
     align-items: center;
@@ -22,84 +22,94 @@ const Cards=styled.div`
     
     
 `
-const Imagem= styled.img`
+const Imagem = styled.img`
     width: 30%;
 `
-const DivPai=styled.div`
+const DivPai = styled.div`
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
     justify-content: space-evenly;
 
 `
-const NomeProduto= styled.p`
+const NomeProduto = styled.p`
     font-size: large;
     font-weight: bold;
-` 
+`
 
 
 
 export default class ListaProdutos extends Component {
 
     state = {
+        valorSelect: "Crescente",
+
         produtos: [
             {
                 id: 1,
                 name: "BigBoy",
-                value: 10.000,
-                imageUrl:Imagem1,
-    },
+                value: 10000,
+                imageUrl: Imagem1,
+            },
             {
                 id: 2,
                 name: "Goliath",
-                value: 15.000,
+                value: 15000,
                 imageUrl: Imagem2,
-    },
+            },
             {
                 id: 3,
                 name: "Leonov",
-                value: 30.000,
+                value: 30000,
                 imageUrl: Imagem3,
-    },
+            },
             {
                 id: 4,
                 name: "Liberator",
-                value: 18.000,
+                value: 18000,
                 imageUrl: Imagem4,
-    },
+            },
             {
                 id: 5,
                 name: "Newpiranha",
-                value: 17.000,
+                value: 17000,
                 imageUrl: Imagem5,
-    },
+            },
             {
                 id: 6,
                 name: "Nostromo",
-                value: 22.000,
+                value: 22000,
                 imageUrl: Imagem6,
-    },
+            },
             {
                 id: 7,
                 name: "Phoenix",
-                value: 12.000,
+                value: 12000,
                 imageUrl: Imagem7,
-    },
+            },
             {
                 id: 8,
                 name: "Vevengek",
-                value: 40.000,
+                value: 40000,
                 imageUrl: Imagem8,
-    },
+            },
             {
                 id: 9,
                 name: "Yamato",
-                value: 30.000,
+                value: 30000,
                 imageUrl: Imagem9,
-    },
+            },
 
 
         ]
+    }
+    pegarOrdem = (event) => {
+        this.setState({ valorSelect: event.target.value })
+        // this.state.produtos.value.sort(function (a, b) {
+        //     if (a > b) return 1;
+        //     if (a < b) return -1;
+        //     return 0;
+        // });
     }
 
     render() {
@@ -109,7 +119,7 @@ export default class ListaProdutos extends Component {
                 <Cards key={Math.random()}>
                     <Imagem src={produto.imageUrl} alt="" />
                     <NomeProduto>{produto.name}</NomeProduto>
-                    <p>R$:{produto.value} </p> 
+                    <p>R$:{produto.value} </p>
                     <button>Adicionar ao Carrinho</button>
                 </Cards>
             )
@@ -118,15 +128,21 @@ export default class ListaProdutos extends Component {
 
 
         return (
-        <div>
-        <p>Quantidade de Produtos: {this.state.produtos.length}</p>
-        
-        <DivPai>
-            
-        {renderizarProdutos}
-        
-        </DivPai>
-        </div>)
+            <div>
+
+                <p>Quantidade de Produtos: {this.state.produtos.length}</p>
+                <p>Ordenação:</p>
+                <select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
+                    <option value="Crescente">Crescente</option>
+                    <option value="Decrescente">Decrescente</option>
+                </select>
+
+                <DivPai>
+
+                    {renderizarProdutos}
+
+                </DivPai>
+            </div>)
     }
 
 }
