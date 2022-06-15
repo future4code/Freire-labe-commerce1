@@ -1,6 +1,17 @@
 import React from 'react';
 import styled from "styled-components"
 import Logo from "./img/logo.png"
+import ListaProdutos from './Components/Produtos/Produtos';
+
+import Imagem1 from './img/BigBoy.png'
+import Imagem2 from './img/Goliath.png'
+import Imagem3 from './img/Leonov.png'
+import Imagem4 from './img/Liberator.png'
+import Imagem5 from './img/Newpiranha.png'
+import Imagem6 from './img/Nostromo.png'
+import Imagem7 from './img/Phoenix.png'
+import Imagem8 from './img/Vevengek.png'
+import Imagem9 from './img/Yamato.png'
 
 
 const Container = styled.div`
@@ -44,7 +55,7 @@ function App() {
       <Header><Imagem src={Logo} alt="" /></Header>
       <Main>
         <Filtros></Filtros>
-        <Produtos></Produtos>
+        <Produtos><ListaProdutos/></Produtos>
         <Carrinho></Carrinho>
       </Main>
       <footer></footer>
