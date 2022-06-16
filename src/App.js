@@ -43,8 +43,8 @@ class App extends React.Component {
   state = {
     minFiltro: 100,
     maxFiltro: 1000,
-    nameFiltro: '',
-    productsInCart: ['']
+    nameFiltro: 'Produto',
+    produtosNoCarrinho: ['']
   }
 
   onChangeMinFiltro = (event) => {
@@ -72,7 +72,7 @@ class App extends React.Component {
               onChangeMaxFiltro={this.onChangeMaxFiltro}            
               onChangeNameFiltro={this.onChangeNameFiltro}                  
             />
-        <Produtos> <ListaProdutos/> </Produtos>
+        <Produtos><ListaProdutos/> </Produtos>
         <Carrinho></Carrinho>
       </Main>
       <footer></footer>

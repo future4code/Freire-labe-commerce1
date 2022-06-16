@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components';
-import App from '../../App';
 
 const FiltrosContainer = styled.div`
   border: 1px solid black;
