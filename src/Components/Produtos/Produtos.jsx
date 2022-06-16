@@ -16,28 +16,45 @@ const Cards = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 30%;
     margin: 0 0 15px 0;
-    
-    
+    box-shadow: black 0.1em 0.1em 0.2em;  
 `
 const Imagem = styled.img`
-    width: 30%;
+   max-width: 80%;
+   align-items: center;
+	-moz-transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	transition: all 0.3s;   
 `
+const ZoomImg = styled.div`
+    overflow: hidden;
+	&:hover{
+	-moz-transform: scale(2.1);
+	-webkit-transform: scale(2.1);
+	transform: scale(2.1);
+    background-color: white;
+    justify-content: center;
+}
+`
+
 const DivPai = styled.div`
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
+`
+const Botao = styled.button`
+    &:hover{
+    box-shadow: #222121 0.1em 0.1em;
+    }
+  
 `
 const NomeProduto = styled.p`
     font-size: large;
     font-weight: bold;
 `
-
-
 
 export default class ListaProdutos extends Component {
 
@@ -117,10 +134,13 @@ export default class ListaProdutos extends Component {
 
             return (
                 <Cards key={Math.random()}>
-                    <Imagem src={produto.imageUrl} alt="" />
+                    <ZoomImg>
+                        <Imagem src={produto.imageUrl} alt="" />
+                    </ZoomImg>
                     <NomeProduto>{produto.name}</NomeProduto>
                     <p>R$:{produto.value} </p>
-                    <button>Adicionar ao Carrinho</button>
+                    <Botao>Adicionar ao Carrinho</Botao>
+
                 </Cards>
             )
         }
