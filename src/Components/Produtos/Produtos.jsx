@@ -38,12 +38,9 @@ const NomeProduto = styled.p`
 `
 
 
-
 export default class ListaProdutos extends Component {
-
     state = {
         valorSelect: "Crescente",
-
         produtos: [
             {
                 id: 1,
@@ -99,9 +96,7 @@ export default class ListaProdutos extends Component {
                 value: 30000,
                 imageUrl: Imagem9,
             },
-
-
-        ]
+        ],
     }
     pegarOrdem = (event) => {
         this.setState({ valorSelect: event.target.value })
@@ -111,36 +106,29 @@ export default class ListaProdutos extends Component {
         //     return 0;
         // });
     }
-
     render() {
         const renderizarProdutos = this.state.produtos.map((produto) => {
-
             return (
                 <Cards key={Math.random()}>
                     <Imagem src={produto.imageUrl} alt="" />
                     <NomeProduto>{produto.name}</NomeProduto>
-                    <p>R$:{produto.value} </p>
+                    <p>R${produto.value} </p>
                     <button>Adicionar ao Carrinho</button>
                 </Cards>
             )
         }
         )
 
-
         return (
             <div>
-
                 <p>Quantidade de Produtos: {this.state.produtos.length}</p>
                 <p>Ordenação:</p>
                 <select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
                     <option value="Crescente">Crescente</option>
                     <option value="Decrescente">Decrescente</option>
                 </select>
-
                 <DivPai>
-
                     {renderizarProdutos}
-
                 </DivPai>
             </div>)
     }

@@ -4,6 +4,8 @@ import Logo from "./img/logo.png";
 import ListaProdutos from './Components/Produtos/Produtos';
 import {Filtros} from './Components/filtro/filtros';
 
+
+
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -25,60 +27,34 @@ const Main = styled.main`
 
 const Filtro = styled.div`
   grid-column: 1/span 4;
-  background-color: green;
 `
 
 const Produtos = styled.div`
   grid-column: 5/span 12;
-  display: flex;
-  flex-direction: row;
-
 `
+
 const Carrinho = styled.div`
   grid-column: 17/span 4;
   background-color: blue;
 `
 
 class App extends React.Component {
-  state = {
-    minFiltro: 100,
-    maxFiltro: 1000,
-    nameFiltro: 'Produto',
-    produtosNoCarrinho: ['']
-  }
-
-  onChangeMinFiltro = (event) => {
-    this.setState({minFiltro: event.target.value})
-  }
-
-  onChangeMaxFiltro = (event) => {
-    this.setState({maxFiltro: event.target.value})
-  }
-
-  onChangeNameFiltro = (event) => {
-    this.setState({nameFiltro: event.target.value})
-  }
-
   render() {
   return (
     <Container className="App">
       <Header><Imagem src={Logo} alt="" /></Header>
       <Main>
-      <Filtros
-              minFiltro={this.state.minFiltro}
-              maxFiltro={this.state.maxFiltro}
-              nameFiltro={this.state.nameFiltro}
-              onChangeMinFiltro={this.onChangeMinFiltro}            
-              onChangeMaxFiltro={this.onChangeMaxFiltro}            
-              onChangeNameFiltro={this.onChangeNameFiltro}                  
-            />
-        <Produtos><ListaProdutos/> </Produtos>
+        <Filtro>
+        <Filtros/>
+        </Filtro>
+        <Produtos><ListaProdutos/></Produtos>
         <Carrinho></Carrinho>
       </Main>
       <footer></footer>
     </Container>
-        );
-      }
-    }
+  );
+}
+}
 
 export default App;
+

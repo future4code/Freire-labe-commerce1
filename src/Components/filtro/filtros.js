@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import ListaProdutos from '../Produtos/Produtos';
 
 const FiltrosContainer = styled.div`
   border: 1px solid black;
@@ -12,34 +13,62 @@ const InputsContainer = styled.label`
   align-items: flex-start;
   margin-bottom: 8px;
 `
+
+
 export class Filtros extends React.Component {
-    render() {
-      return <FiltrosContainer>
-        <h2>Filtros</h2>
-          <InputsContainer>
-            Valor mínimo:
-            <input
-              type="number"
-              value={this.props.minFiltro}
-              onChange={this.props.onChangeMinFiltro}
-            />
-          </InputsContainer>
-          <InputsContainer>
-            Valor máximo:
-            <input
-              type="number"
-              value={this.props.maxFiltro}
-              onChange={this.props.onChangeMaxFiltro}
-            />
-          </InputsContainer>
-          <InputsContainer>
-            Buscar item por nome:
-            <input
-              type="text"
-              value={this.props.nameFiltro}
-              onChange={this.props.onChangeNameFiltro}
-            />
-          </InputsContainer>
-      </FiltrosContainer>
-    }
+  state = {
+    produtos: ListaProdutos,
+    minPreco: "",
+    maxPreco: "",
+    nomeBuscar: "",
   }
+
+  onChangeMinPreco = (event) => {
+    this.setState({ minPreco: event.target.value })
+  }
+
+  onChangeMaxPreco = (event) => {
+    this.setState({ maxPreco: event.target.value })
+  }
+
+  onChangeNomeBuscar = (event) => {
+    this.setState({ nomeBuscar: event.target.value })
+  }
+
+
+  render() {
+    return <FiltrosContainer>
+      <h2>Filtros</h2>
+      <InputsContainer>
+        <p>Valor mínimo:</p>
+        <input
+          type="number"
+          value={this.state.maxPreco}
+          onChange={this.onChangeMaxPreco}
+        />
+      </InputsContainer>
+      <InputsContainer>
+        <p>Valor maximo</p>
+        <input
+          type="number"
+          value={this.state.minPreco}
+          onChange={this.onChangeMinPreco}
+        />
+      </InputsContainer>
+      <InputsContainer>
+        <p>Pesquisa por nome:</p>
+        <input
+          type="text"
+          placeholder="Pesquisa"
+          value={this.state.nomeBuscar}
+          onChange={this.onChangeNomeBuscar}
+        />
+      </InputsContainer>
+    </FiltrosContainer>
+  }
+}
+
+
+
+
+
