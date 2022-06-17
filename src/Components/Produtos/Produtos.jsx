@@ -20,14 +20,22 @@ const Cards = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    /* border: 1px solid black; */
     width: 30%;
     margin: 0 0 15px 0;
     padding: 20px 0;
     box-shadow:0px 0px 10px 0px rgb(0 0 0 / 88%);
+    background-color: rgba(219, 219, 219, 0.25);
+    border-radius: 10px;
+    :hover{
+  transform: scale(1.5);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
+    /* color: lightgray; */
 `
 const Imagem = styled.img`
     width: 30%;
+    :hover{
+  transform: scale(3.1);
+}
 `
 const BoxProdutos = styled.div`
     display: flex;
