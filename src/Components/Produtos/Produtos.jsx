@@ -10,22 +10,26 @@ import Imagem7 from '../../img/Phoenix.png'
 import Imagem8 from '../../img/Vevengek.png'
 import Imagem9 from '../../img/Yamato.png'
 
+
+const Container = styled.div`
+    width: 100%;
+`
 const Cards = styled.div`
     display: flex;
     flex-direction:column;
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 30%;
     margin: 0 0 15px 0;
-    
-    
+    padding: 20px 0;
+    box-shadow:0px 0px 10px 0px rgb(0 0 0 / 88%);
 `
 const Imagem = styled.img`
     width: 30%;
 `
-const DivPai = styled.div`
+const BoxProdutos = styled.div`
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
@@ -37,10 +41,26 @@ const NomeProduto = styled.p`
     font-weight: bold;
 `
 
+const BoxOrdenacao = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 0 24px 8px;
+`
+const BoxCresDec = styled.div`
+    display: flex;
+    align-items: center;
+`
+
+const Select = styled.select`
+    margin-left: 20px;
+    height: 20px;
+
+`
 
 export default class ListaProdutos extends Component {
+
     state = {
-        valorSelect: "Crescente",
+
         produtos: [
             {
                 id: 1,
@@ -96,41 +116,105 @@ export default class ListaProdutos extends Component {
                 value: 30000,
                 imageUrl: Imagem9,
             },
-        ],
+
+
+        ]
     }
+
+
+    ordenarAoInicariar = () => {
+        const listaCopia = [...this.state.produtos]
+        listaCopia.sort(function (a, b) {
+            if (a.value > b.value) {
+                return true;
+            } else {
+                return -1;
+            }
+        })
+        this.setState({produtos: listaCopia})
+    }
+
+
+    componentDidMount () {
+        this.ordenarAoInicariar()
+    }
+
     pegarOrdem = (event) => {
-        this.setState({ valorSelect: event.target.value })
-        // this.state.produtos.value.sort(function (a, b) {
-        //     if (a > b) return 1;
-        //     if (a < b) return -1;
-        //     return 0;
-        // });
+        const listaCopia = [...this.state.produtos]
+        if (event.target.value === "Crescente") {
+            listaCopia.sort(function (a, b) {
+                if (a.value > b.value) {
+                    return true;
+                } else {
+                    return -1;
+                }
+            })
+        } else {
+            listaCopia.sort(function (a, b) {
+                if (a.value > b.value) {
+                    return -1;
+                } else {
+                    return true;
+                }
+            })
+        }
+        this.setState({produtos: listaCopia})
+        console.log(event.target.value)
+
+
+
+    
     }
+
+    adicionarAoCarrinho = (produto) => {
+        this.props.pegarValores(produto)
+
+    }
+
+
     render() {
-        const renderizarProdutos = this.state.produtos.map((produto) => {
+        const renderizarProdutos = this.state.produtos
+        .filter((produto) => {
+            return !this.props.valueMin || produto.value >= this.props.valueMin
+        })
+        .filter((produto) => {
+            return !this.props.valueMax || produto.value <= this.props.valueMax
+        })
+        .filter((produto) => {
+            return produto.name.toLowerCase().includes(this.props.ValueBusca.toLowerCase())
+        })
+        .map((produto) => {
+
             return (
                 <Cards key={Math.random()}>
                     <Imagem src={produto.imageUrl} alt="" />
                     <NomeProduto>{produto.name}</NomeProduto>
-                    <p>R${produto.value} </p>
-                    <button>Adicionar ao Carrinho</button>
+                    <p>R$:{produto.value} </p>
+                    <button onClick={() => this.adicionarAoCarrinho(produto)}>Adicionar ao Carrinho</button>
                 </Cards>
             )
         }
         )
 
+
         return (
-            <div>
-                <p>Quantidade de Produtos: {this.state.produtos.length}</p>
+            <Container>
+                <BoxOrdenacao>
+                <p>Quantidade de Produtos: {renderizarProdutos.length}</p>
+                <BoxCresDec>
                 <p>Ordenação:</p>
-                <select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
+                <Select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
                     <option value="Crescente">Crescente</option>
                     <option value="Decrescente">Decrescente</option>
-                </select>
-                <DivPai>
+                </Select>
+                </BoxCresDec>
+                </BoxOrdenacao>
+                <BoxProdutos>
+
                     {renderizarProdutos}
-                </DivPai>
-            </div>)
+
+                </BoxProdutos>
+            </Container>)
     }
 
 }
