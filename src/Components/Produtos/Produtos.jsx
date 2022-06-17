@@ -10,6 +10,10 @@ import Imagem7 from '../../img/Phoenix.png'
 import Imagem8 from '../../img/Vevengek.png'
 import Imagem9 from '../../img/Yamato.png'
 
+
+const Container = styled.div`
+    width: 100%;
+`
 const Cards = styled.div`
     display: flex;
     flex-direction:column;
@@ -169,7 +173,17 @@ export default class ListaProdutos extends Component {
 
 
     render() {
-        const renderizarProdutos = this.state.produtos.map((produto) => {
+        const renderizarProdutos = this.state.produtos
+        .filter((produto) => {
+            return !this.props.valueMin || produto.value >= this.props.valueMin
+        })
+        .filter((produto) => {
+            return !this.props.valueMax || produto.value <= this.props.valueMax
+        })
+        .filter((produto) => {
+            return produto.name.toLowerCase().includes(this.props.ValueBusca.toLowerCase())
+        })
+        .map((produto) => {
 
             return (
                 <Cards key={Math.random()}>
@@ -184,9 +198,9 @@ export default class ListaProdutos extends Component {
 
 
         return (
-            <div>
+            <Container>
                 <BoxOrdenacao>
-                <p>Quantidade de Produtos: {this.state.produtos.length}</p>
+                <p>Quantidade de Produtos: {renderizarProdutos.length}</p>
                 <BoxCresDec>
                 <p>Ordenação:</p>
                 <Select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
@@ -200,7 +214,7 @@ export default class ListaProdutos extends Component {
                     {renderizarProdutos}
 
                 </BoxProdutos>
-            </div>)
+            </Container>)
     }
 
 }
