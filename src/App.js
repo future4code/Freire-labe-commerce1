@@ -2,16 +2,7 @@ import React from 'react';
 import styled from "styled-components"
 import Logo from "./img/logo.png"
 import ListaProdutos from './Components/Produtos/Produtos';
-
-import Imagem1 from './img/BigBoy.png'
-import Imagem2 from './img/Goliath.png'
-import Imagem3 from './img/Leonov.png'
-import Imagem4 from './img/Liberator.png'
-import Imagem5 from './img/Newpiranha.png'
-import Imagem6 from './img/Nostromo.png'
-import Imagem7 from './img/Phoenix.png'
-import Imagem8 from './img/Vevengek.png'
-import Imagem9 from './img/Yamato.png'
+import ProdutosCarrinho from './Components/Carrinho/Carrinho';
 
 
 const Container = styled.div`
@@ -40,27 +31,101 @@ const Filtros = styled.div`
 
 const Produtos = styled.div`
   grid-column: 5/span 12;
-  background-color: yellow;
+  display: flex;
+  flex-direction: row;
+  
 
 `
 
 const Carrinho = styled.div`
   grid-column: 17/span 4;
-  background-color: blue;
 
 `
-function App() {
-  return (
-    <Container className="App">
-      <Header><Imagem src={Logo} alt="" /></Header>
-      <Main>
-        <Filtros></Filtros>
-        <Produtos><ListaProdutos/></Produtos>
-        <Carrinho></Carrinho>
-      </Main>
-      <footer></footer>
-    </Container>
-  );
+
+
+class App extends React.Component {
+
+  state = {
+    listaCompras: [],
+    apagar: true
+  }
+
+
+pegarValores = (produtos) => {
+
+  const adicionarValoresALista = () => {
+    if (!produtos.quantidade) {
+      produtos.quantidade = 1
+    }
+    const listaCompleta = [...this.state.listaCompras, produtos]
+    this.setState({ listaCompras: listaCompleta })
+    this.setState({ apagar: false })
+    console.log(this.state)
+  }
+
+  // const armazenaProduto = produtos
+  if (this.state.listaCompras.length === 0) {
+    return adicionarValoresALista()
+  }
+
+  for (let i = 0; i < this.state.listaCompras.length; i++) {
+    (console.log(produtos.id === this.state.listaCompras[i].id))
+    if (produtos.id === this.state.listaCompras[i].id) {
+      const copiaLista = [...this.state.listaCompras]
+      if (!copiaLista[i].quantidade) {
+        copiaLista[i].quantidade = 2
+      } else {
+        copiaLista[i].quantidade += 1
+      }
+      console.log(copiaLista)
+      return this.setState({ listaCompras: copiaLista })
+    } else {
+      adicionarValoresALista()
+    }
+
+  }
+
+  adicionarValoresALista()
+}
+
+  apagarItem = () => {
+    const listaLocalstorege = JSON.parse(localStorage.getItem("carrinho"))
+    this.setState({ listaCompras: listaLocalstorege })
+  }
+
+
+  componentDidMount() {
+    const listaLocalstorege = JSON.parse(localStorage.getItem("carrinho"))
+    if (localStorage.length === 0) { return }
+    this.setState({ listaCompras: listaLocalstorege })
+  }
+
+  componentDidUpdate() {
+    const listaCopia = JSON.parse(localStorage.getItem("carrinho"))
+    console.log(listaCopia)
+    if (!this.state.apagar) {
+      this.setState({ listaCompras: listaCopia })
+      this.setState({ apagar: true })
+    }
+
+  }
+
+  render() {
+
+
+
+    return (
+      <Container className="App">
+        <Header><Imagem src={Logo} alt="" /></Header>
+        <Main>
+          <Filtros></Filtros>
+          <Produtos> <ListaProdutos pegarValores={this.pegarValores} /> </Produtos>
+          <Carrinho><ProdutosCarrinho apagarItens={() => this.apagarItem()} listaCarrinho={this.state.listaCompras} /></Carrinho>
+        </Main>
+        <footer></footer>
+      </Container>
+    );
+  }
 }
 
 export default App;
