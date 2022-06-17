@@ -1,8 +1,10 @@
 import React from 'react';
-import styled from "styled-components"
-import Logo from "./img/logo.png"
+import styled from "styled-components";
+import Logo from "./img/logo.png";
 import ListaProdutos from './Components/Produtos/Produtos';
 import ProdutosCarrinho from './Components/Carrinho/Carrinho';
+import Filtro from './Components/Filtros/Filtro';
+
 
 
 const Container = styled.div`
@@ -26,7 +28,7 @@ const Main = styled.main`
 
 const Filtros = styled.div`
   grid-column: 1/span 4;
-  background-color: green;
+  border: none;
 `
 
 const Produtos = styled.div`
@@ -44,49 +46,51 @@ const Carrinho = styled.div`
 
 
 class App extends React.Component {
-
   state = {
     listaCompras: [],
-    apagar: true
+    apagar: true,
+    valorMinimo: "",
+    valorMaximo: "",
+    nomeBuscar: "",
   }
 
 
-pegarValores = (produtos) => {
+  pegarValores = (produtos) => {
 
-  const adicionarValoresALista = () => {
-    if (!produtos.quantidade) {
-      produtos.quantidade = 1
-    }
-    const listaCompleta = [...this.state.listaCompras, produtos]
-    this.setState({ listaCompras: listaCompleta })
-    this.setState({ apagar: false })
-    console.log(this.state)
-  }
-
-  // const armazenaProduto = produtos
-  if (this.state.listaCompras.length === 0) {
-    return adicionarValoresALista()
-  }
-
-  for (let i = 0; i < this.state.listaCompras.length; i++) {
-    (console.log(produtos.id === this.state.listaCompras[i].id))
-    if (produtos.id === this.state.listaCompras[i].id) {
-      const copiaLista = [...this.state.listaCompras]
-      if (!copiaLista[i].quantidade) {
-        copiaLista[i].quantidade = 2
-      } else {
-        copiaLista[i].quantidade += 1
+    const adicionarValoresALista = () => {
+      if (!produtos.quantidade) {
+        produtos.quantidade = 1
       }
-      console.log(copiaLista)
-      return this.setState({ listaCompras: copiaLista })
-    } else {
-      adicionarValoresALista()
+      const listaCompleta = [...this.state.listaCompras, produtos]
+      this.setState({ listaCompras: listaCompleta })
+      this.setState({ apagar: false })
+      console.log(this.state)
     }
 
-  }
+    // const armazenaProduto = produtos
+    if (this.state.listaCompras.length === 0) {
+      return adicionarValoresALista()
+    }
 
-  adicionarValoresALista()
-}
+    for (let i = 0; i < this.state.listaCompras.length; i++) {
+      (console.log(produtos.id === this.state.listaCompras[i].id))
+      if (produtos.id === this.state.listaCompras[i].id) {
+        const copiaLista = [...this.state.listaCompras]
+        if (!copiaLista[i].quantidade) {
+          copiaLista[i].quantidade = 2
+        } else {
+          copiaLista[i].quantidade += 1
+        }
+        console.log(copiaLista)
+        return this.setState({ listaCompras: copiaLista })
+      } else {
+        adicionarValoresALista()
+      }
+
+    }
+
+    adicionarValoresALista()
+  }
 
   apagarItem = () => {
     const listaLocalstorege = JSON.parse(localStorage.getItem("carrinho"))
@@ -102,13 +106,27 @@ pegarValores = (produtos) => {
 
   componentDidUpdate() {
     const listaCopia = JSON.parse(localStorage.getItem("carrinho"))
-    console.log(listaCopia)
     if (!this.state.apagar) {
       this.setState({ listaCompras: listaCopia })
       this.setState({ apagar: true })
     }
 
   }
+
+  onChangeMaxPreco = (event) => {
+    this.setState({ valorMaximo: event.target.value })
+    console.log(this.state.valorMaximo)
+  }
+
+  onChangeMinPreco = (event) => {
+    this.setState({ valorMinimo: event.target.value })
+    // this.setState({condicaoMin: true})
+  }
+
+  onChangeNomeBuscar = (event) => {
+    this.setState({ nomeBuscar: event.target.value })
+  }
+
 
   render() {
 
@@ -118,8 +136,24 @@ pegarValores = (produtos) => {
       <Container className="App">
         <Header><Imagem src={Logo} alt="" /></Header>
         <Main>
-          <Filtros></Filtros>
-          <Produtos> <ListaProdutos pegarValores={this.pegarValores} /> </Produtos>
+          <Filtros>
+            <Filtro
+              valueMin={this.state.valorMinimo}
+              valueMax={this.state.valorMaximo}
+              ValueBusca={this.state.nomeBuscar}
+              onChangeMaxPreco={this.onChangeMaxPreco}
+              onChangeMinPreco={this.onChangeMinPreco}
+              onChangeNomeBuscar={this.onChangeNomeBuscar}
+            />
+          </Filtros>
+          <Produtos>
+            <ListaProdutos
+              valueMin={this.state.valorMinimo}
+              valueMax={this.state.valorMaximo}
+              ValueBusca={this.state.nomeBuscar}
+              pegarValores={this.pegarValores}
+            />
+          </Produtos>
           <Carrinho><ProdutosCarrinho apagarItens={() => this.apagarItem()} listaCarrinho={this.state.listaCompras} /></Carrinho>
         </Main>
         <footer></footer>
@@ -128,4 +162,8 @@ pegarValores = (produtos) => {
   }
 }
 
+
 export default App;
+
+
+
