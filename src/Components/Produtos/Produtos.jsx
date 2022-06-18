@@ -26,15 +26,15 @@ const Cards = styled.div`
     box-shadow:0px 0px 10px 0px rgb(0 0 0 / 88%);
     background-color: rgba(219, 219, 219, 0.25);
     border-radius: 10px;
-    :hover{
-  transform: scale(1.5);
+:hover{
+  transform: scale(1.3);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
-    /* color: lightgray; */
+
 `
 const Imagem = styled.img`
-    width: 30%;
-    :hover{
-  transform: scale(3.1);
+    width: 50%;
+:hover{
+  transform: scale(2.1);
 }
 `
 const BoxProdutos = styled.div`

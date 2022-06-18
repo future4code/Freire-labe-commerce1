@@ -12,6 +12,7 @@ const InputsContainer = styled.label`
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 8px;
+
 `
 
 export default class Filtros extends React.Component {
