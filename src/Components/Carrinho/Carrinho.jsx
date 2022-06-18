@@ -26,21 +26,23 @@ const BoxItensCarrinho = styled.div`
 `
 
 const Botao = styled.button`
-    height: 40px;
-    margin-right: 5px;
+    height: 30px;
     cursor: pointer;
+    :hover {
+            background-color: red;
+            color:white;
+        }
 `
 
 const BoxInformacoesProdutosCarrinho = styled.div `
 display: flex;
 align-items: center;
-
 `
 
 const ParagrafoListaCarrinho = styled.p `
-    padding: 0 5px;
-`
+    padding: 0 3px;
 
+`
 export default class ProdutosCarrinho extends React.Component {
 
     state = {
