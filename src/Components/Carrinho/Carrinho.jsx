@@ -37,14 +37,12 @@ const Botao = styled.button`
 const BoxInformacoesProdutosCarrinho = styled.div `
 display: flex;
 align-items: center;
-
-
 `
 
 const ParagrafoListaCarrinho = styled.p `
     padding: 0 3px;
-`
 
+`
 export default class ProdutosCarrinho extends React.Component {
 
     state = {

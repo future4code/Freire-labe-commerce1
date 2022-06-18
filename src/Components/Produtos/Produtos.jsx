@@ -24,23 +24,22 @@ const Cards = styled.div`
     padding: 20px 0;
     background-color: rgba(219, 219, 219, 0.25);
     border-radius: 20px;
-    :hover{
+    &:hover{
     transform: scale(1.3);
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
     button {
     font-size: 15px;
     cursor: pointer;
-    :hover {
+    &:hover {
             background-color: black;
             color:white;
         }
-
-
 }
 `
+
 const Imagem = styled.img`
     width: 40%;
-:hover {transform: scale(2.1);}
+&:hover {transform: scale(2.1);}
 `
 const BoxProdutos = styled.div`
     display: flex;
@@ -57,7 +56,6 @@ const BoxOrdenacao = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 24px 8px;
-    
 `
 const BoxCresDec = styled.div`
     display: flex;
@@ -144,11 +142,11 @@ export default class ListaProdutos extends Component {
                 return -1;
             }
         })
+      
         this.setState({ produtos: listaCopia })
     }
 
-
-    componentDidMount() {
+    componentDidMount () {
         this.ordenarAoInicariar()
     }
 
@@ -172,11 +170,6 @@ export default class ListaProdutos extends Component {
             })
         }
         this.setState({ produtos: listaCopia })
-        console.log(event.target.value)
-
-
-
-
     }
 
     adicionarAoCarrinho = (produto) => {
@@ -221,6 +214,7 @@ export default class ListaProdutos extends Component {
                             <option value="Decrescente">Decrescente</option>
                         </Select>
                     </BoxCresDec>
+
                 </BoxOrdenacao>
                 <BoxProdutos>
 

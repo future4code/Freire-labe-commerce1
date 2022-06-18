@@ -5,7 +5,6 @@ import ListaProdutos from './Components/Produtos/Produtos';
 import ProdutosCarrinho from './Components/Carrinho/Carrinho';
 import Filtro from './Components/Filtros/Filtro';
 
-
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -36,8 +35,6 @@ const Main = styled.main`
 const Filtros = styled.div`
   grid-column: 1/span 4;
   border: none;
-  
-  
 `
 
 const Produtos = styled.div`
