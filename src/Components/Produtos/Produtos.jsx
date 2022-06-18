@@ -19,30 +19,34 @@ const Cards = styled.div`
     flex-direction:column;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
     width: 30%;
     margin: 0 0 15px 0;
     padding: 20px 0;
-    box-shadow:0px 0px 10px 0px rgb(0 0 0 / 88%);
     background-color: rgba(219, 219, 219, 0.25);
-    border-radius: 10px;
-:hover{
-  transform: scale(1.3);
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
+    border-radius: 20px;
+    :hover{
+    transform: scale(1.3);
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
+    button {
+    font-size: 15px;
+    cursor: pointer;
+    :hover {
+            background-color: black;
+            color:white;
+        }
 
+
+}
 `
 const Imagem = styled.img`
-    width: 50%;
-:hover{
-  transform: scale(2.1);
-}
+    width: 40%;
+:hover {transform: scale(2.1);}
 `
 const BoxProdutos = styled.div`
     display: flex;
     box-sizing: border-box;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
 `
 const NomeProduto = styled.p`
     font-size: large;
@@ -53,6 +57,7 @@ const BoxOrdenacao = styled.div`
     display: flex;
     justify-content: space-between;
     margin: 0 24px 8px;
+    
 `
 const BoxCresDec = styled.div`
     display: flex;
@@ -139,11 +144,11 @@ export default class ListaProdutos extends Component {
                 return -1;
             }
         })
-        this.setState({produtos: listaCopia})
+        this.setState({ produtos: listaCopia })
     }
 
 
-    componentDidMount () {
+    componentDidMount() {
         this.ordenarAoInicariar()
     }
 
@@ -166,12 +171,12 @@ export default class ListaProdutos extends Component {
                 }
             })
         }
-        this.setState({produtos: listaCopia})
+        this.setState({ produtos: listaCopia })
         console.log(event.target.value)
 
 
 
-    
+
     }
 
     adicionarAoCarrinho = (produto) => {
@@ -182,40 +187,40 @@ export default class ListaProdutos extends Component {
 
     render() {
         const renderizarProdutos = this.state.produtos
-        .filter((produto) => {
-            return !this.props.valueMin || produto.value >= this.props.valueMin
-        })
-        .filter((produto) => {
-            return !this.props.valueMax || produto.value <= this.props.valueMax
-        })
-        .filter((produto) => {
-            return produto.name.toLowerCase().includes(this.props.ValueBusca.toLowerCase())
-        })
-        .map((produto) => {
+            .filter((produto) => {
+                return !this.props.valueMin || produto.value >= this.props.valueMin
+            })
+            .filter((produto) => {
+                return !this.props.valueMax || produto.value <= this.props.valueMax
+            })
+            .filter((produto) => {
+                return produto.name.toLowerCase().includes(this.props.ValueBusca.toLowerCase())
+            })
+            .map((produto) => {
 
-            return (
-                <Cards key={Math.random()}>
-                    <Imagem src={produto.imageUrl} alt="" />
-                    <NomeProduto>{produto.name}</NomeProduto>
-                    <p>R$:{produto.value} </p>
-                    <button onClick={() => this.adicionarAoCarrinho(produto)}>Adicionar ao Carrinho</button>
-                </Cards>
+                return (
+                    <Cards key={Math.random()}>
+                        <Imagem src={produto.imageUrl} alt="" />
+                        <NomeProduto>{produto.name}</NomeProduto>
+                        <p>R$:{produto.value} </p>
+                        <button onClick={() => this.adicionarAoCarrinho(produto)}>Adicionar ao Carrinho</button>
+                    </Cards>
+                )
+            }
             )
-        }
-        )
 
 
         return (
             <Container>
                 <BoxOrdenacao>
-                <p>Quantidade de Produtos: {renderizarProdutos.length}</p>
-                <BoxCresDec>
-                <p>Ordenação:</p>
-                <Select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
-                    <option value="Crescente">Crescente</option>
-                    <option value="Decrescente">Decrescente</option>
-                </Select>
-                </BoxCresDec>
+                    <p>Quantidade de Produtos: {renderizarProdutos.length}</p>
+                    <BoxCresDec>
+                        <p>Ordenação:</p>
+                        <Select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
+                            <option value="Crescente">Crescente</option>
+                            <option value="Decrescente">Decrescente</option>
+                        </Select>
+                    </BoxCresDec>
                 </BoxOrdenacao>
                 <BoxProdutos>
 

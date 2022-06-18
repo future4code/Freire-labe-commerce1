@@ -6,7 +6,6 @@ import ProdutosCarrinho from './Components/Carrinho/Carrinho';
 import Filtro from './Components/Filtros/Filtro';
 
 
-
 const Container = styled.div`
 display: flex;
 flex-direction: column;
@@ -16,8 +15,10 @@ const Header = styled.div`
   align-items: center;
   justify-content: center;
   padding: 10px;
-  background-color: transparent;
-  background-color: rgba(219, 219, 219, 0.25);
+  /* background-color: transparent; */
+  /* background-color: rgba(219, 219, 219, 0.25); */
+  background-image: url("https://t4.ftcdn.net/jpg/03/18/93/17/240_F_318931784_ui7HN4y0F8HuoMghY8kB57Lpz2aviMRS.jpg")
+  /* background-image: url("https://t4.ftcdn.net/jpg/02/77/76/67/360_F_277766785_LU0UUP7xS41MGraZz8sBHey1MEae4gQG.jpg") */
 `
 const Imagem = styled.img`
   width: 180px;
@@ -29,11 +30,13 @@ const Main = styled.main`
   background-image: url("https://media.istockphoto.com/photos/starry-outer-space-background-texture-picture-id1064074580?k=20&m=1064074580&s=170667a&w=0&h=akiw5A9_RGa85zQKs513jAO0Du9e5otCri3J0AqjC1E=");
   position: relative;
   color:whitesmoke;
+  
 `
 
 const Filtros = styled.div`
   grid-column: 1/span 4;
   border: none;
+  
   
 `
 
@@ -41,13 +44,10 @@ const Produtos = styled.div`
   grid-column: 5/span 12;
   display: flex;
   flex-direction: row;
-  
-
 `
 
 const Carrinho = styled.div`
   grid-column: 17/span 4;
-
 `
 
 
