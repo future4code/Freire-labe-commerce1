@@ -29,9 +29,9 @@ Olá, bem-vindo ao ToMars, aqui você irá encontrar a sua próxima nave espacia
 - Styled Components  
 
 ## 👨‍🚀 Desenolvedores
-- Gustavo 
-- Aline
-- Jônatas 
+- Gustavo Monteiro
+- Aline Chagas
+- Jônatas Felix
 
 ## 🌐 LINK DO PROJETO
 Surge: 
