@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import styled from "styled-components";
 import Imagem1 from '../../img/BigBoy.png'
 import Imagem2 from '../../img/Goliath.png'
 import Imagem3 from '../../img/Leonov.png'
@@ -9,69 +8,12 @@ import Imagem6 from '../../img/Nostromo.png'
 import Imagem7 from '../../img/Phoenix.png'
 import Imagem8 from '../../img/Vevengek.png'
 import Imagem9 from '../../img/Yamato.png'
-
-
-const Container = styled.div`
-    width: 100%;
-`
-const Cards = styled.div`
-    display: flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: center;
-    width: 30%;
-    margin: 0 0 15px 0;
-    padding: 20px 0;
-    background-color: rgba(219, 219, 219, 0.25);
-    border-radius: 20px;
-    &:hover{
-    transform: scale(1.3);
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);}
-    button {
-    font-size: 15px;
-    cursor: pointer;
-    &:hover {
-            background-color: black;
-            color:white;
-        }
-}
-`
-
-const Imagem = styled.img`
-    width: 40%;
-&:hover {transform: scale(2.1);}
-`
-const BoxProdutos = styled.div`
-    display: flex;
-    box-sizing: border-box;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-`
-const NomeProduto = styled.p`
-    font-size: large;
-    font-weight: bold;
-`
-
-const BoxOrdenacao = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin: 0 24px 8px;
-`
-const BoxCresDec = styled.div`
-    display: flex;
-    align-items: center;
-`
-
-const Select = styled.select`
-    margin-left: 20px;
-    height: 20px;
-
-`
+import { ParagrafoOrdenacao, Container, Cards, Imagem, BoxProdutos, BoxOrdenacao, NomeProduto, BoxCresDec, Select } from "./Styled";
 
 export default class ListaProdutos extends Component {
 
     state = {
-
+        tamanhoTela: "",
         produtos: [
             {
                 id: 1,
@@ -206,9 +148,9 @@ export default class ListaProdutos extends Component {
         return (
             <Container>
                 <BoxOrdenacao>
-                    <p>Quantidade de Produtos: {renderizarProdutos.length}</p>
+                    <ParagrafoOrdenacao>Quantidade de Produtos: {renderizarProdutos.length}</ParagrafoOrdenacao>
                     <BoxCresDec>
-                        <p>Ordenação:</p>
+                        <p>Ordenação:</p> 
                         <Select onChange={this.pegarOrdem} name="Ordem dos Produtos" id="ordem produtos">
                             <option value="Crescente">Crescente</option>
                             <option value="Decrescente">Decrescente</option>

@@ -1,59 +1,37 @@
 import React from 'react'
-import styled from 'styled-components';
-import ListaProdutos from '../Produtos/Produtos';
-
-const FiltrosContainer = styled.div`
-  /* border: 1px solid black; */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8px;
-  text-align: center;
-`;
-
-const InputsContainer = styled.label`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: 8px;
-  text-align: center;
-`
+import { H2Filtros, FiltrosContainer, InputsContainer, InputEstilo } from './Style'
 
 
 export default class Filtro extends React.Component {
-
-  pegaListaFiltrada = () => {
-    return this.props.produtos
-      .filter((produto) => produto.valor <= (this.props.filtroMax || Infinity))
-      .filter((produto) => produto.valor >= this.props.filtroMin)
-      .filter((produto) => produto.nome.includes(this.props.filtroNome))
-      .sort((a, b) => this.state.ordenacao === "Crescente" ? a.valor - b.valor : b.valor - a.valor)
-  }
-
   render() {
     return (
     <FiltrosContainer>
-      <h2>Filtros</h2>
+      <H2Filtros>Filtros</H2Filtros>
       <InputsContainer>
-        <p>Valor mínimo:</p>
-        <input
+      <label htmlFor="ValorMinimo">Valor minimo:</label>
+        <InputEstilo
+          name='ValorMinimo'
+          id='ValorMinimo'
           type="number"
-
           value={this.props.valueMin}
           onChange={this.props.onChangeMinPreco}
         />
       </InputsContainer>
       <InputsContainer>
-        <p>Valor maximo</p>
-        <input
+      <label htmlFor="ValorMaximo">Valor maximo</label>
+        <InputEstilo
+          name='ValorMaximo'
+          id='ValorMaximo'
           type="number"
           value={this.props.valueMax}
           onChange={this.props.onChangeMaxPreco}
         />
       </InputsContainer>
       <InputsContainer>
-        <p>Pesquisa por nome:</p>
-        <input
+      <label htmlFor="Pesquisa">Pesquisa por nome:</label>
+        <InputEstilo
+          name='Pesquisa'
+          id='Pesquisa'
           type="text"
           placeholder="Pesquisa"
           value={this.props.valueBusca}

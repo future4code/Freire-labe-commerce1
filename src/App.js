@@ -4,29 +4,32 @@ import Logo from "./img/logo.png";
 import ListaProdutos from './Components/Produtos/Produtos';
 import ProdutosCarrinho from './Components/Carrinho/Carrinho';
 import Filtro from './Components/Filtros/Filtro';
+import Rodape from './Components/Rodape/Rodape';
 
 const Container = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 10px;
-  /* background-color: transparent; */
-  /* background-color: rgba(219, 219, 219, 0.25); */
-  background-image: url("https://t4.ftcdn.net/jpg/03/18/93/17/240_F_318931784_ui7HN4y0F8HuoMghY8kB57Lpz2aviMRS.jpg")
-  /* background-image: url("https://t4.ftcdn.net/jpg/02/77/76/67/360_F_277766785_LU0UUP7xS41MGraZz8sBHey1MEae4gQG.jpg") */
+  background-image: url("https://t4.ftcdn.net/jpg/03/18/93/17/240_F_318931784_ui7HN4y0F8HuoMghY8kB57Lpz2aviMRS.jpg");
 `
 const Imagem = styled.img`
   width: 180px;
 `
+const BackgroundMainEFooter = styled.div`
+  background-image: url("https://media.istockphoto.com/photos/starry-outer-space-background-texture-picture-id1064074580?k=20&m=1064074580&s=170667a&w=0&h=akiw5A9_RGa85zQKs513jAO0Du9e5otCri3J0AqjC1E=");
+`
 
 const Main = styled.main`
+  min-height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(20, 1fr);
-  background-image: url("https://media.istockphoto.com/photos/starry-outer-space-background-texture-picture-id1064074580?k=20&m=1064074580&s=170667a&w=0&h=akiw5A9_RGa85zQKs513jAO0Du9e5otCri3J0AqjC1E=");
   position: relative;
   color:whitesmoke;
   
@@ -35,18 +38,61 @@ const Main = styled.main`
 const Filtros = styled.div`
   grid-column: 1/span 4;
   border: none;
+
+  @media(max-width: 1360px) {
+    grid-column: 1/span 3;
+  }
+
+  @media(max-width: 1140px) {
+    grid-column: 1/span 6;
+  }
+  @media(max-width: 820px) {
+    display: none;
+  }
+
 `
 
 const Produtos = styled.div`
   grid-column: 5/span 12;
   display: flex;
   flex-direction: row;
+
+  @media(max-width: 1360px) {
+    grid-column: 4/span 12;
+  }
+
+  @media(max-width: 1140px) {
+    grid-column: 7/span 14;
+  }
+
+  @media(max-width: 820px) {
+    grid-column: 1/span 20;
+  }
+
 `
 
 const Carrinho = styled.div`
   grid-column: 17/span 4;
+
+  @media(max-width: 1360px) {
+    grid-column: 16/span 5;
+  }
+
+  @media(max-width: 1140px) {
+    display: none;
+  }
 `
 
+const CarrinhoMobile = styled.div`
+  display: none;
+  @media(max-width: 1140px) {
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    z-index: 1000;
+  }
+`
 
 class App extends React.Component {
   state = {
@@ -132,14 +178,20 @@ class App extends React.Component {
 
 
   render() {
-
-
-
     return (
       <Container className="App">
-        <Header><Imagem src={Logo} alt="" /></Header>
-        <Main>
-          <Filtros>
+        <Header>
+          <Imagem src={Logo} alt="" />
+          <CarrinhoMobile>
+            <ProdutosCarrinho
+              apagarItens={() => this.apagarItem()}
+              listaCarrinho={this.state.listaCompras}
+            />
+          </CarrinhoMobile>
+        </Header>
+        <BackgroundMainEFooter>
+          <Main>
+            <Filtros>
             <Filtro
               valueMin={this.state.valorMinimo}
               valueMax={this.state.valorMaximo}
@@ -147,19 +199,24 @@ class App extends React.Component {
               onChangeMaxPreco={this.onChangeMaxPreco}
               onChangeMinPreco={this.onChangeMinPreco}
               onChangeNomeBuscar={this.onChangeNomeBuscar}
+              />
+            </Filtros>
+            <Produtos>
+              <ListaProdutos
+                valueMin={this.state.valorMinimo}
+                valueMax={this.state.valorMaximo}
+                ValueBusca={this.state.nomeBuscar}
+                pegarValores={this.pegarValores}
+              />
+            </Produtos>
+            <Carrinho><ProdutosCarrinho
+              apagarItens={() => this.apagarItem()}
+              listaCarrinho={this.state.listaCompras}
             />
-          </Filtros>
-          <Produtos>
-            <ListaProdutos
-              valueMin={this.state.valorMinimo}
-              valueMax={this.state.valorMaximo}
-              ValueBusca={this.state.nomeBuscar}
-              pegarValores={this.pegarValores}
-            />
-          </Produtos>
-          <Carrinho><ProdutosCarrinho apagarItens={() => this.apagarItem()} listaCarrinho={this.state.listaCompras} /></Carrinho>
-        </Main>
-        <footer></footer>
+            </Carrinho>
+          </Main>
+          <footer><Rodape /></footer>
+        </BackgroundMainEFooter>
       </Container>
     );
   }
