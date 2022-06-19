@@ -26,6 +26,8 @@ const BackgroundMainEFooter = styled.div`
 
 const Main = styled.main`
   min-height: 100vh;
+  max-width: 1500px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(20, 1fr);
   position: relative;
@@ -36,6 +38,11 @@ const Main = styled.main`
 const Filtros = styled.div`
   grid-column: 1/span 4;
   border: none;
+
+  @media(max-width: 1360px) {
+    grid-column: 1/span 3;
+  }
+
   @media(max-width: 1140px) {
     grid-column: 1/span 6;
   }
@@ -50,6 +57,10 @@ const Produtos = styled.div`
   display: flex;
   flex-direction: row;
 
+  @media(max-width: 1360px) {
+    grid-column: 4/span 12;
+  }
+
   @media(max-width: 1140px) {
     grid-column: 7/span 14;
   }
@@ -62,6 +73,11 @@ const Produtos = styled.div`
 
 const Carrinho = styled.div`
   grid-column: 17/span 4;
+
+  @media(max-width: 1360px) {
+    grid-column: 16/span 5;
+  }
+
   @media(max-width: 1140px) {
     display: none;
   }
@@ -162,9 +178,6 @@ class App extends React.Component {
 
 
   render() {
-
-
-
     return (
       <Container className="App">
         <Header>
@@ -179,13 +192,13 @@ class App extends React.Component {
         <BackgroundMainEFooter>
           <Main>
             <Filtros>
-              <Filtro
-                valueMin={this.state.valorMinimo}
-                valueMax={this.state.valorMaximo}
-                ValueBusca={this.state.nomeBuscar}
-                onChangeMaxPreco={this.onChangeMaxPreco}
-                onChangeMinPreco={this.onChangeMinPreco}
-                onChangeNomeBuscar={this.onChangeNomeBuscar}
+            <Filtro
+              valueMin={this.state.valorMinimo}
+              valueMax={this.state.valorMaximo}
+              ValueBusca={this.state.nomeBuscar}
+              onChangeMaxPreco={this.onChangeMaxPreco}
+              onChangeMinPreco={this.onChangeMinPreco}
+              onChangeNomeBuscar={this.onChangeNomeBuscar}
               />
             </Filtros>
             <Produtos>

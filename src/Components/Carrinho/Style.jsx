@@ -16,6 +16,11 @@ export const ImagemCarrinho = styled.img`
         display: none;
     }
 `
+export const BoxCarrinhoMobile = styled.div`
+    @media(min-width: 1141px) {
+            display: none;
+        }
+`
 
 export const ImagemCarrinhoMobile = styled.img`
 @media(min-width: 1141px) {
@@ -42,10 +47,20 @@ export const BoxItensCarrinho = styled.div`
 export const AtivadoraMobile = styled.div`
     @media(max-width: 1140px) {
         display: ${props => props.valorClick ? "block" : "none"};
+        position: absolute;
+        top: 50px;
         background:#dbdbdbe2;
         border-radius: 8px;
         padding: 20px;
         width: 260px;
+        &:after {
+            content: '';
+            border: 10px solid transparent;
+            position: absolute;
+            top: -20px;
+            border-bottom-color: #dbdbdbe2;
+            right: 12px;
+        }
     }
 `
 

@@ -2,7 +2,7 @@ import React from "react";
 import ImgCarrinho from "../../img/carrinho-de-compras.png"
 import { ParagrafoCarrinhoVazio, XParaFecharCarrinho, ParagrafoMobile, Container, ImagemCarrinho, 
     ImagemCarrinhoMobile, AtivadoraMobile, BoxTitulo, BoxItensCarrinho, Botao, 
-    BoxInformacoesProdutosCarrinho, ParagrafoListaCarrinho } from "./Style"
+    BoxInformacoesProdutosCarrinho, ParagrafoListaCarrinho, BoxCarrinhoMobile } from "./Style"
 
 export default class ProdutosCarrinho extends React.Component {
 
@@ -109,11 +109,11 @@ export default class ProdutosCarrinho extends React.Component {
 
         return (
             <Container>
-                <div onClick={this.ativadorCarrinhoMobile}>
+                <BoxCarrinhoMobile onClick={this.ativadorCarrinhoMobile}>
                     {this.state.carrinhoAtivo ? <XParaFecharCarrinho>X</XParaFecharCarrinho> : ""}
                     <ImagemCarrinhoMobile src={ImgCarrinho} alt="Imgagem Carrinho" />
                     {this.state.QuantItensCarrinho ? <ParagrafoMobile>{this.state.QuantItensCarrinho}</ParagrafoMobile> : ""}
-                </div>
+                </BoxCarrinhoMobile>
                 <AtivadoraMobile valorClick={this.state.carrinhoAtivo}>
                     <BoxTitulo>
                         <p>Carrinho</p>
