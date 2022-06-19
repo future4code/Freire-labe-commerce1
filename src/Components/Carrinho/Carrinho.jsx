@@ -1,52 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import ImgCarrinho from "../../img/carrinho-de-compras.png"
+import { ParagrafoCarrinhoVazio, XParaFecharCarrinho, ParagrafoMobile, Container, ImagemCarrinho, 
+    ImagemCarrinhoMobile, AtivadoraMobile, BoxTitulo, BoxItensCarrinho, Botao, 
+    BoxInformacoesProdutosCarrinho, ParagrafoListaCarrinho } from "./Style"
 
-
-const ImagemCarrinho = styled.img`
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-    width: 40px;
-    height: 40px;
-`
-const BoxTitulo = styled.div`
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    border-bottom: 1px solid;
-`
-
-const BoxItensCarrinho = styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 4px;
-`
-
-const Botao = styled.button`
-    height: 30px;
-    cursor: pointer;
-    :hover {
-            background-color: red;
-            color:white;
-        }
-`
-
-const BoxInformacoesProdutosCarrinho = styled.div `
-display: flex;
-align-items: center;
-`
-
-const ParagrafoListaCarrinho = styled.p `
-    padding: 0 3px;
-
-`
 export default class ProdutosCarrinho extends React.Component {
 
     state = {
-        valorTotal: 0
+        valorTotal: 0,
+        carrinhoAtivo: false,
+        QuantItensCarrinho: 0,
     }
 
     removerProdutoCarrinho = (id, quantidade) => {
@@ -87,9 +50,29 @@ export default class ProdutosCarrinho extends React.Component {
         }
     }
 
+
+    contadorItensCarrinho = () => {
+        const lista = JSON.parse(localStorage.getItem("carrinho"))
+        let valor = 0
+        lista.map(item => {
+           return valor += item.quantidade
+        })
+        if (valor !== this.state.QuantItensCarrinho) {
+            this.setState({ QuantItensCarrinho: valor })
+        }
+    }
+
+
+    ativadorCarrinhoMobile = () => {
+        if (window.screen.width <= 1140) {
+            this.setState({ carrinhoAtivo: !this.state.carrinhoAtivo })
+        }
+    }
+
     componentDidUpdate() {
         localStorage.setItem("carrinho", JSON.stringify(this.props.listaCarrinho))
         this.calcularTotal()
+        this.contadorItensCarrinho()
     }
 
 
@@ -97,7 +80,7 @@ export default class ProdutosCarrinho extends React.Component {
 
         const RenderizarNaTela = () => {
             if (this.props.listaCarrinho.length === 0) {
-                return <p>Vazio</p>
+                return <ParagrafoCarrinhoVazio>Vazio</ParagrafoCarrinhoVazio>
             } else {
                 return (
                     this.props.listaCarrinho.map((produto) => {
@@ -113,7 +96,7 @@ export default class ProdutosCarrinho extends React.Component {
                                     <ParagrafoListaCarrinho>{produto.quantidade}  x </ParagrafoListaCarrinho>
                                     <ParagrafoListaCarrinho>{produto.name}</ParagrafoListaCarrinho>
                                     <ParagrafoListaCarrinho>R$:{produto.value} </ParagrafoListaCarrinho>
-       
+
 
                                 </BoxInformacoesProdutosCarrinho>
                                 <Botao onClick={() => this.removerProdutoCarrinho(produto.id, produto.quantidade)}>Remover</Botao>
@@ -125,14 +108,21 @@ export default class ProdutosCarrinho extends React.Component {
         }
 
         return (
-            <div>
-                <BoxTitulo>
-                    <p>Carrinho</p>
-                    <ImagemCarrinho src={ImgCarrinho} alt="" />
-                </BoxTitulo>
-                <RenderizarNaTela />
-                <div><p> Valor Total: R$ {this.state.valorTotal === 0 ? "0,00" : this.state.valorTotal}</p></div>
-            </div>
+            <Container>
+                <div onClick={this.ativadorCarrinhoMobile}>
+                    {this.state.carrinhoAtivo ? <XParaFecharCarrinho>X</XParaFecharCarrinho> : ""}
+                    <ImagemCarrinhoMobile src={ImgCarrinho} alt="Imgagem Carrinho" />
+                    {this.state.QuantItensCarrinho ? <ParagrafoMobile>{this.state.QuantItensCarrinho}</ParagrafoMobile> : ""}
+                </div>
+                <AtivadoraMobile valorClick={this.state.carrinhoAtivo}>
+                    <BoxTitulo>
+                        <p>Carrinho</p>
+                        <ImagemCarrinho src={ImgCarrinho} alt="" onClick={this.ativadorCarrinhoMobile} />
+                    </BoxTitulo>
+                    <RenderizarNaTela />
+                    <div><p> Valor Total: R$ {this.state.valorTotal === 0 ? "0,00" : this.state.valorTotal}</p></div>
+                </AtivadoraMobile>
+            </Container>
         )
     }
 }
