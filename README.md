@@ -1,5 +1,5 @@
 # 🚀 Projeto ToMars - Lab-Commerce 
-Olá, bem-vindo ao ToMars, aqui você irá encontrar a sua próxima nave espacial.
+Olá, seja bem-vindo ao ToMars, aqui você irá encontrar a sua próxima nave espacial.
 
 ## ✅ Requisitos
 
