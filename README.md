@@ -17,12 +17,13 @@ Olá, seja bem-vindo ao ToMars, aqui você irá encontrar a sua próxima nave es
 - [x] Mostrar todos os produtos e quantidades adicionadas;
 - [x] Capacidade de remover itens do carrinho;
 - [x] Mostrar o valor total do carrinho;
+- [x] Itens do carrinho ficam salvos no LocalSorege;
 
 - Responsividade e Estilização CSS
 - [x] Personalização inspirada em jogos retrô;
 - [x] Efeitos de botões em adicionar carrinho e remover;
 - [x] Alteração de escala ao passar o mouse sobre o card ou imagem;
-- [x]  Site com responsividade para mobile/tablet/Desktop;
+- [x] Site com responsividade para mobile/tablet/Desktop;
 
 ## 🛠 Tecnologias utilizadas
 - React (JSX)
