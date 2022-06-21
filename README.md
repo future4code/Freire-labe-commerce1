@@ -35,8 +35,8 @@ Olá, seja bem-vindo ao ToMars, aqui você irá encontrar a sua próxima nave es
 - Jônatas Felix
 
 ## 🌐 LINK DO PROJETO
-Recomentado - Surge: https://tomars.surge.sh/
-netlify: https://62b1eb6a5562ba656466c319--sunny-pie-fb4865.netlify.app/
+- Recomendado - Surge: https://tomars.surge.sh/
+- Netlify: https://62b1eb6a5562ba656466c319--sunny-pie-fb4865.netlify.app/
 
 ## 💻 Visão geral - Versão Desktop
 ![tomars surge sh_](https://user-images.githubusercontent.com/20983673/174484314-4da6229b-3499-405f-90fe-74b1575078ca.png)
